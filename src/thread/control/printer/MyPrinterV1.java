@@ -38,7 +38,7 @@ public class MyPrinterV1 {
 
                 String job = jobQueue.poll();
                 log("출력 시작: " + job + " 대기 문서: " + jobQueue);
-
+                sleep(3000);
                 log("출력 완료");
             }
             log("프린터 종료");
