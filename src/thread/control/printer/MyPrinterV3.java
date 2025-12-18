@@ -17,7 +17,6 @@ public class MyPrinterV3 {
             log("프린터할 문서를 입력하세요. 종료 (q): ");
             String input = sc.nextLine();
             if(input.equals("q")) {
-                printer.work = false;
                 thread.interrupt();
                 break;
             }
@@ -26,12 +25,11 @@ public class MyPrinterV3 {
     }
 
     static class Printer implements Runnable {
-        volatile boolean work = true;
         Queue<String> jobQueue = new ConcurrentLinkedQueue<>();
 
         @Override
         public void run() {
-            while(work) {
+            while(!Thread.interrupted()) {
                 if(jobQueue.isEmpty()) {
                     continue;
                 }
